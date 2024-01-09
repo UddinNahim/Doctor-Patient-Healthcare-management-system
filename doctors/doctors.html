@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Doctors</title>
+    <link rel="stylesheet" href="doctors.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="../index.php" class="logo"><i
+                        class="fas fa-heartbeat"></i><strong>HealthCare</strong></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 m-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/index.php">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Services
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="../diagnostics-test/index.php">Diagnostics</a>
+                                </li>
+                                <li><a class="dropdown-item" href="../consultation-package/index.php">Consultation</a>
+                                </li>
+                                <li><a class="dropdown-item" href="../shopping-cart/index.php">E-Pharmacy</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Appointment</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Review</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Blogs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Registration
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="../patient/index.php" target="_blank">Patient
+                                        Panel</a></li>
+                                <li><a class="dropdown-item" href="../doctors/index.php" target="_blank">Doctor
+                                        Panel</a></li>
+                                <li><a class="dropdown-item" href="../patient/logout.php" target="_blank">Log
+                                        out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <img src="moon.png" id="moon" onclick="darkMode()">
+                        <img src="suny.png" id="sun" onclick="lightMode()">
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <h2 class="doctors-text">Find Your Doctor Name</h2>
+    <div class="selection-container">
+        <div class="content">
+
+            <div class="content-1">
+                <!-- Search by Doctor's Name -->
+                <div class="form-group">
+                    <label for="doctorName">Find Your Doctor Name</label>
+                    <div class="input-group mb-3">
+                        <input type="search" class="form-control" id="doctorNameInput" placeholder="Enter Doctor's Name"
+                            aria-label="Enter Doctor's Name" aria-describedby="inputGroup-sizing-default">
+                        <button onclick="findDoctorByName()" class="input-group-text doc-btn"
+                            id="inputGroup-sizing-default">Find</butt>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="content-2">
+                <!-- Search by Specialists -->
+                <label for="specialists">Search Specialists:</label>
+                <select id="specialists" class="form-control">
+                    <option value="">Select Specialist</option>
+                    <option value="Psychiatry">Psychiatry & Drug Addiction</option>
+                    <option value="Child Specialist">Child Specialist</option>
+                    <option value="Plastic Surgery">Burn & Plastic Surgery</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Chest Diseases">Chest Diseases & Medicine</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="Skin Consultant">Skin Consultant</option>
+                </select>
+            </div>
+
+            <div class="content-3">
+                <!-- Search by City -->
+                <label for="city">Select City</label>
+                <select class="form-control" id="city">
+                    <option value="">Select City</option>
+                    <option value="Gazipur">Gazipur</option>
+                    <option value="Dhaka">Dhaka</option>
+                    <option value="Chattogram">Chattogram</option>
+                    <option value="Cumilla">Cumilla</option>
+                    <option value="Rajshahi">Rajshahi</option>
+                    <option value="Barishal">Barishal</option>
+                    <option value="Rangpur">Rangpur</option>
+                </select>
+
+            </div>
+        </div>
+    </div>
+    <!-- <hr class="hr"> -->
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-4 Services-tab item">
+                <div class="folded-corner service_tab_1">
+                    <div class="text">
+                        <img src="../image/doc-2.jpg" class="fa-icon-image">
+                        <p class="item-title">
+                        <h3>Dr. Tareq Ahmed</h3>
+                        <h6>National Institute of Mental Health</h6>
+                        <h6 class="city-item">(City : Dhaka)</h6>
+                        </p>
+                        <div class="some-title-info">
+                            <span class="card-info-title">Psychiatry</span>
+                            <span class="card-info-title">Drug Addiction</span>
+
+                            <div class="icon-title">
+                                <i class="fas fa-comment-dots"></i>
+                                <span class="text-message">Text Message</span> <br>
+                                <i class="fas fa-video"></i>
+                                <span class="video-call">Join in Video Call</span> <br>
+                                <i class="fas fa-calendar-alt"></i>
+                                <span class="text-appointment">Appointment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating-icon">
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <!-- <span>4.5</span> -->
+                    </div>
+                    <div class="button">
+                        <a href="doc-tareq.php" target="_blank"><button class="get">Full
+                                Profile</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 Services-tab item">
+                <div class="folded-corner service_tab_1">
+                    <div class="text">
+                        <img src="../image/doc-5.jpg" class="fa-icon-image">
+                        <p class="item-title">
+                        <h3>Dr. Shamsuzzaman</h3>
+                        <h6>MBBS, DCH (Ireland), MPH (NSU)</h6>
+                        <h6 class="city-item">(City : Barishal)</h6>
+                        </p>
+                        <div class="some-title-info">
+                            <span class="card-info-title">Child Specialist</span>
+                            <span class="card-info-title">Child Specialist</span>
+
+                            <div class="icon-title">
+                                <i class="fas fa-comment-dots"></i>
+                                <span class="text-message">Text Message</span> <br>
+                                <i class="fas fa-video"></i>
+                                <span class="video-call">Join in Video Call</span> <br>
+                                <i class="fas fa-calendar-alt"></i>
+                                <span class="text-appointment">Appointment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating-icon">
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <!-- <span>4.5</span> -->
+                    </div>
+                    <div class="button">
+                        <a href="doc-shams.php" target="_blank"><button class="get">Full
+                                Profile</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 Services-tab item">
+                <div class="folded-corner service_tab_1">
+                    <div class="text">
+                        <img src="../image/doc-6.jpg" class="fa-icon-image">
+                        <p class="item-title">
+                        <h3>Dr. Maruf Hossain</h3>
+                        <h6>Professor LABAID Cardiac Hospital</h6>
+                        <h6 class="city-item">(City : Dhaka)</h6>
+                        </p>
+                        <div class="some-title-info">
+                            <span class="card-info-title">Plastic Surgery</span>
+                            <span class="card-info-title">Burn Unit</span>
+
+                            <div class="icon-title">
+                                <i class="fas fa-comment-dots"></i>
+                                <span class="text-message">Text Message</span> <br>
+                                <i class="fas fa-video"></i>
+                                <span class="video-call">Join in Video Call</span> <br>
+                                <i class="fas fa-calendar-alt"></i>
+                                <span class="text-appointment">Appointment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating-icon">
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <!-- <span>4.5</span> -->
+                    </div>
+                    <div class="button">
+                        <a href="doc-maruf.php" target="_blank"><button class="get">Full
+                                Profile</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 Services-tab item">
+                <div class="folded-corner service_tab_1">
+                    <div class="text">
+                        <img src="../image/doc-new.png" class="fa-icon-image">
+                        <p class="item-title">
+                        <h3>Prof. Dr. Jamal Khan</h3>
+                        <h6>National Institute of Mental Health</h6>
+                        <h6 class="city-item">(City : Rangpur)</h6>
+                        </p>
+                        <div class="some-title-info">
+                            <span class="card-info-title">Child Specialist</span>
+                            <span class="card-info-title">Child Specialist</span>
+
+                            <div class="icon-title">
+                                <i class="fas fa-comment-dots"></i>
+                                <span class="text-message">Text Message</span> <br>
+                                <i class="fas fa-video"></i>
+                                <span class="video-call">Join in Video Call</span> <br>
+                                <i class="fas fa-calendar-alt"></i>
+                                <span class="text-appointment">Appointment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating-icon">
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <!-- <span>4.5</span> -->
+                    </div>
+                    <div class="button">
+                        <a href="doc-jamal.php" target="_blank"><button class="get">Full Profile</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 Services-tab item">
+                <div class="folded-corner service_tab_1">
+                    <div class="text">
+                        <img src="../image/doc-4.jpg" class="fa-icon-image">
+                        <p class="item-title">
+                        <h3>Dr. Fahima Khatun</h3>
+                        <h6>Associate Professor of Plastic Surgery</h6>
+                        <h6 class="city-item">(City : Cumilla)</h6>
+                        </p>
+                        <div class="some-title-info">
+                            <span class="card-info-title">Plastic Surgery</span>
+                            <span class="card-info-title">Burn Unit</span>
+
+                            <div class="icon-title">
+                                <i class="fas fa-comment-dots"></i>
+                                <span class="text-message">Text Message</span> <br>
+                                <i class="fas fa-video"></i>
+                                <span class="video-call">Join in Video Call</span> <br>
+                                <i class="fas fa-calendar-alt"></i>
+                                <span class="text-appointment">Appointment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating-icon">
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <!-- <span>4.5</span> -->
+                    </div>
+                    <div class="button">
+                        <a href="/Doctor_Patient/appoinment/appoin.html"><button class="get">Full
+                                Profile</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 Services-tab item">
+                <div class="folded-corner service_tab_1">
+                    <div class="text">
+                        <img src="../image/doc-7.jpg" class="fa-icon-image">
+                        <p class="item-title">
+                        <h3>Dr. Lutfa Tasnim</h3>
+                        <h6>Chief Cardiac Surgeon, Ibna Sina</h6>
+                        <h6 class="city-item">(City : Gazipur)</h6>
+                        </p>
+                        <div class="some-title-info">
+                            <span class="card-info-title">Cardiology</span>
+                            <span class="card-info-title">Cardiac Specialist</span>
+
+                            <div class="icon-title">
+                                <i class="fas fa-comment-dots"></i>
+                                <span class="text-message">Text Message</span> <br>
+                                <i class="fas fa-video"></i>
+                                <span class="video-call">Join in Video Call</span> <br>
+                                <i class="fas fa-calendar-alt"></i>
+                                <span class="text-appointment">Appointment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating-icon">
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <!-- <span>4.5</span> -->
+                    </div>
+                    <div class="button">
+                        <a href="/Doctor_Patient/appoinment/appoin.html"><button class="get">Full
+                                Profile</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 Services-tab item">
+                <div class="folded-corner service_tab_1">
+                    <div class="text">
+                        <img src="../image/doc-8.jpg" class="fa-icon-image">
+                        <p class="item-title">
+                        <h3>Prof. Dr. Humayun Kabir</h3>
+                        <h6>MBBS(DMC), FCPS(Medicine)</h6>
+                        <h6 class="city-item">(City: Dhaka)</h6>
+                        </p>
+                        <div class="some-title-info">
+                            <span class="card-info-title">Chest Diseases</span>
+                            <span class="card-info-title">Medicine</span>
+
+                            <div class="icon-title">
+                                <i class="fas fa-comment-dots"></i>
+                                <span class="text-message">Text Message</span> <br>
+                                <i class="fas fa-video"></i>
+                                <span class="video-call">Join in Video Call</span> <br>
+                                <i class="fas fa-calendar-alt"></i>
+                                <span class="text-appointment">Appointment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating-icon">
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <!-- <span>4.5</span> -->
+                    </div>
+                    <div class="button">
+                        <a href="/Doctor_Patient/appoinment/appoin.html"><button class="get">Full
+                                Profile</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 Services-tab item">
+                <div class="folded-corner service_tab_1">
+                    <div class="text">
+                        <img src="../image/doc-9.jpg" class="fa-icon-image">
+                        <p class="item-title">
+                        <h3>Dr. Md. Lokman Hossain</h3>
+                        <h6>Cardiac Surgeon Kurmitola Hospital</h6>
+                        <h6 class="city-item">(City : Dhaka)</h6>
+                        </p>
+                        <div class="some-title-info">
+                            <span class="card-info-title">Cardiology</span>
+                            <span class="card-info-title">Cardiac Specialist</span>
+
+                            <div class="icon-title">
+                                <i class="fas fa-comment-dots"></i>
+                                <span class="text-message">Text Message</span> <br>
+                                <i class="fas fa-video"></i>
+                                <span class="video-call">Join in Video Call</span> <br>
+                                <i class="fas fa-calendar-alt"></i>
+                                <span class="text-appointment">Appointment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating-icon">
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <!-- <span>4.5</span> -->
+                    </div>
+                    <div class="button">
+                        <a href="/Doctor_Patient/appoinment/appoin.html"><button class="get">Full
+                                Profile</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 Services-tab item">
+                <div class="folded-corner service_tab_1">
+                    <div class="text">
+                        <img src="../image/doc-14.jpg" class="fa-icon-image">
+                        <p class="item-title">
+                        <h3>Prof. Dr. Ashraful Alam</h3>
+                        <h6>MBBS (DMC), FCPS (Medicine), MD(Chest)</h6>
+                        <h6 class="city-item">(City : Cumilla)</h6>
+                        </p>
+                        <div class="some-title-info">
+                            <span class="card-info-title">Chest Diseases</span>
+                            <span class="card-info-title">Medicine</span>
+
+                            <div class="icon-title">
+                                <i class="fas fa-comment-dots"></i>
+                                <span class="text-message">Text Message</span> <br>
+                                <i class="fas fa-video"></i>
+                                <span class="video-call">Join in Video Call</span> <br>
+                                <i class="fas fa-calendar-alt"></i>
+                                <span class="text-appointment">Appointment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating-icon">
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <!-- <span>4.5</span> -->
+                    </div>
+                    <div class="button">
+                        <a href="/Doctor_Patient/appoinment/appoin.html"><button class="get">Full
+                                Profile</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 Services-tab item">
+                <div class="folded-corner service_tab_1">
+                    <div class="text">
+                        <img src="../image/doc-13.png" class="fa-icon-image">
+                        <p class="item-title">
+                        <h3>Dr. Sirajul Haque</h3>
+                        <h6>Chief Consultant Popular Hospital</h6>
+                        <h6 class="city-item">(City : Chattogram)</h6>
+                        </p>
+                        <div class="some-title-info">
+                            <span class="card-info-title">Neurology</span>
+                            <span class="card-info-title">Medicine</span>
+
+                            <div class="icon-title">
+                                <i class="fas fa-comment-dots"></i>
+                                <span class="text-message">Text Message</span> <br>
+                                <i class="fas fa-video"></i>
+                                <span class="video-call">Join in Video Call</span> <br>
+                                <i class="fas fa-calendar-alt"></i>
+                                <span class="text-appointment">Appointment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating-icon">
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <!-- <span>4.5</span> -->
+                    </div>
+                    <div class="button">
+                        <a href="/Doctor_Patient/appoinment/appoin.html"><button class="get">Full
+                                Profile</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 Services-tab item">
+                <div class="folded-corner service_tab_1">
+                    <div class="text">
+                        <img src="../image/doc-12.jpg" class="fa-icon-image">
+                        <p class="item-title">
+                        <h3>Dr. Zahirul Islam</h3>
+                        <h6>(M.B.B.S. ,PGT (Skin &VD), PGT(Medicine))</h6>
+                        <h6 class="city-item">(City : Rajshahi)</h6>
+                        </p>
+                        <div class="some-title-info">
+                            <span class="card-info-title">Skin Consultant</span>
+                            <span class="card-info-title">Allergy</span>
+
+                            <div class="icon-title">
+                                <i class="fas fa-comment-dots"></i>
+                                <span class="text-message">Text Message</span> <br>
+                                <i class="fas fa-video"></i>
+                                <span class="video-call">Join in Video Call</span> <br>
+                                <i class="fas fa-calendar-alt"></i>
+                                <span class="text-appointment">Appointment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating-icon">
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <!-- <span>4.5</span> -->
+                    </div>
+                    <div class="button">
+                        <a href="/Doctor_Patient/appoinment/appoin.html"><button class="get">Full
+                                Profile</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 Services-tab item">
+                <div class="folded-corner service_tab_1">
+                    <div class="text">
+                        <img src="../image/doc-11.jpg" class="fa-icon-image">
+                        <p class="item-title">
+                        <h3>Prof. Dr. Azharul Hoque</h3>
+                        <h6>Professor of LABAID Cancer Hospital</h6>
+                        <h6 class="city-item">(City : Chattogram)</h6>
+                        </p>
+                        <div class="some-title-info">
+                            <span class="card-info-title">Neurology Specialist</span>
+                            <span class="card-info-title">Medicine</span>
+
+                            <div class="icon-title">
+                                <i class="fas fa-comment-dots"></i>
+                                <span class="text-message">Text Message</span> <br>
+                                <i class="fas fa-video"></i>
+                                <span class="video-call">Join in Video Call</span> <br>
+                                <i class="fas fa-calendar-alt"></i>
+                                <span class="text-appointment">Appointment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating-icon">
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <!-- <span>4.5</span> -->
+                    </div>
+                    <div class="button">
+                        <a href="/Doctor_Patient/appoinment/appoin.html"><button class="get">Full
+                                Profile</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 Services-tab item">
+                <div class="folded-corner service_tab_1">
+                    <div class="text">
+                        <img src="../image/doc-10.jpg" class="fa-icon-image">
+                        <p class="item-title">
+                        <h3>Dr. Abdullah Maruf</h3>
+                        <h6>Senior Consultant Tongi Cardiac Hospital</h6>
+                        <h6 class="city-item">(City : Gazipur)</h6>
+                        </p>
+                        <div class="some-title-info">
+                            <span class="card-info-title">Cardiac Specialist</span>
+                            <span class="card-info-title">Cardiology</span>
+
+                            <div class="icon-title">
+                                <i class="fas fa-comment-dots"></i>
+                                <span class="text-message">Text Message</span> <br>
+                                <i class="fas fa-video"></i>
+                                <span class="video-call">Join in Video Call</span> <br>
+                                <i class="fas fa-calendar-alt"></i>
+                                <span class="text-appointment">Appointment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating-icon">
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <!-- <span>4.5</span> -->
+                    </div>
+                    <div class="button">
+                        <a href="/Doctor_Patient/appoinment/appoin.html"><button class="get">Full
+                                Profile</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 Services-tab item">
+                <div class="folded-corner service_tab_1">
+                    <div class="text">
+                        <img src="../image/doc-mahbub.jpg" class="fa-icon-image">
+                        <p class="item-title">
+                        <h3>Dr. Ekramul Islam</h3>
+                        <h6>Chief Consultant Popular Hospital</h6>
+                        <h6 class="city-item">(City : Barishal)</h6>
+                        </p>
+                        <div class="some-title-info">
+                            <span class="card-info-title">Neurology</span>
+                            <span class="card-info-title">Internal Medicine</span>
+
+                            <div class="icon-title">
+                                <i class="fas fa-comment-dots"></i>
+                                <span class="text-message">Text Message</span> <br>
+                                <i class="fas fa-video"></i>
+                                <span class="video-call">Join in Video Call</span> <br>
+                                <i class="fas fa-calendar-alt"></i>
+                                <span class="text-appointment">Appointment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating-icon">
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <!-- <span>4.5</span> -->
+                    </div>
+                    <div class="button">
+                        <a href="/Doctor_Patient/appoinment/appoin.html"><button class="get">Full
+                                Profile</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 Services-tab item">
+                <div class="folded-corner service_tab_1">
+                    <div class="text">
+                        <img src="../image/doc-murad.png" class="fa-icon-image">
+                        <p class="item-title">
+                        <h3>Dr. Murad Hossain</h3>
+                        <h6>(MBBS, BCS(Health), DD(Thailand))</h6>
+                        <h6 class="city-item">(City : Dhaka)</h6>
+                        </p>
+                        <div class="some-title-info">
+                            <span class="card-info-title">Skin Consultant</span>
+                            <span class="card-info-title">Allergy</span>
+
+                            <div class="icon-title">
+                                <i class="fas fa-comment-dots"></i>
+                                <span class="text-message">Text Message</span> <br>
+                                <i class="fas fa-video"></i>
+                                <span class="video-call">Join in Video Call</span> <br>
+                                <i class="fas fa-calendar-alt"></i>
+                                <span class="text-appointment">Appointment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating-icon">
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <i class="fas fa-star" style="color: #FFC014;"></i>
+                        <!-- <span>4.5</span> -->
+                    </div>
+                    <div class="button">
+                        <a href="/Doctor_Patient/appoinment/appoin.html"><button class="get">Full
+                                Profile</button></a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <footer>
+        <div class="credit">©2023<span>HealthCare BD</span>| All Rights Reserved</div>
+        <div class="last-part">
+            <a href="#conditions">Terms & Conditions</a>
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#blogs">Health Blogs</a>
+            <a href="#doctors">Expert Doctors List</a>
+            <a href="contact">Contact Us</a>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <!-- <script src="doctors.js"></script> -->
+    <script>
+        function darkMode() {
+            var element = document.body;
+            element.className = "dark-mode";
+
+        }
+
+        function lightMode() {
+            var element = document.body;
+            element.className = "light-mode";
+
+        }
+
+        const $doctorNameInput = $("#doctorNameInput");
+        const $specialistSelect = $("#specialists");
+        const $citySelect = $("#city");
+        const $doctorCards = $('.col-md-4.Services-tab.item');
+        const $doctorAvailable = $('#docs-avaiable');
+
+        function findDoctorByName() {
+            const searchName = $doctorNameInput.val().trim().toLowerCase();
+            if (searchName === "") {
+                alert("Please enter a doctor's name to search.");
+                return;
+            }
+
+            $doctorCards.each(function () {
+                const doctorName = $(this).find('h3').text().trim().toLowerCase();
+                if (doctorName.includes(searchName)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+
+        function filterDoctorsBySpecialistAndCity() {
+            const selectedSpecialist = $specialistSelect.val();
+            const selectedCity = $citySelect.val();
+
+            $doctorCards.each(function () {
+                const specialistInfo = $(this).find('.card-info-title').text();
+                const cityInfo = $(this).find('.city-item').text();
+
+                const isSpecialistMatch = selectedSpecialist.length && specialistInfo.includes(selectedSpecialist);
+                const isCityMatch = selectedCity.length && cityInfo.includes(`(City : ${selectedCity})`);
+
+                if ((isSpecialistMatch && !selectedCity.length) || (isCityMatch && !selectedSpecialist.length) || (isSpecialistMatch && isCityMatch)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+
+        // Call this function when either the specialist or city selection changes
+        $specialistSelect.change(filterDoctorsBySpecialistAndCity);
+        $citySelect.change(filterDoctorsBySpecialistAndCity);
+    </script>
+
+</body>
+
+</html>
